@@ -378,6 +378,7 @@ MonoBehaviour:
   test2: {fileID: 11400000, guid: 860ba4cbc2333e14fa8b41c403fb3898, type: 2}
   test3: {fileID: 11400000, guid: c2ce2909cbccff943877fcbdce89f8d2, type: 2}
   test4: {fileID: 11400000, guid: 2a9678c1f79fa7b4ea80be1e9e49deee, type: 2}
+  test5: {fileID: 11400000, guid: afc4e9ef69441854a8ea8c36015e8f2b, type: 2}
   size: {x: 6, y: 5}
   hasInitialized: 0
 --- !u!4 &1030671045
@@ -392,6 +393,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1388146033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1388146035}
+  - component: {fileID: 1388146034}
+  m_Layer: 0
+  m_Name: Test2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1388146034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1388146033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1645bb6279b5934cb36a5af2e3b9da9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryName: Container Inventory
+  manager: {fileID: 1396562307}
+  test: {fileID: 11400000, guid: 3cbbfd7d6c14dac48a2462e28f598ad3, type: 2}
+  test2: {fileID: 11400000, guid: 860ba4cbc2333e14fa8b41c403fb3898, type: 2}
+  test3: {fileID: 11400000, guid: c2ce2909cbccff943877fcbdce89f8d2, type: 2}
+  test4: {fileID: 11400000, guid: 2a9678c1f79fa7b4ea80be1e9e49deee, type: 2}
+  test5: {fileID: 11400000, guid: afc4e9ef69441854a8ea8c36015e8f2b, type: 2}
+  size: {x: 6, y: 4}
+  hasInitialized: 0
+--- !u!4 &1388146035
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1388146033}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 560.6514, y: -74.23927, z: -11.186054}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1396562307
 GameObject:
@@ -441,13 +491,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1030671043}
-  transfer: {fileID: 0}
+  transfer: {fileID: 1388146033}
   slotPre: {fileID: 1651229060232510, guid: 57d41b22b4206954dbb5e24985c8a8f7, type: 2}
   bSlotPre: {fileID: 1242658751935396, guid: f67997b37dddb334f842ac1807b45f8d, type: 2}
   iSlotPre: {fileID: 1727857717549788, guid: 3711d7657f7db404c83018f771556591, type: 2}
   textTitlePre: {fileID: 114391049020912226, guid: 0ed3ad1e355ae06488ab68254a9e714a,
     type: 2}
-  test: {fileID: 21300000, guid: aa7b6a0ac864f294fa3ae3f4c5c0d8a4, type: 3}
 --- !u!114 &1396562310
 MonoBehaviour:
   m_ObjectHideFlags: 0

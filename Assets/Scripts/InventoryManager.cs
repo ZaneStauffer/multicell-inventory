@@ -8,26 +8,25 @@ using UnityEngine.UI;
 /// </summary>
 /*
 TODO:
-	1. Make this work with just inventories; remove "playerInv" and instead have "inv1" and "inv2". Inv1 will be the player inventory on the left-hand side,
-		Inv2 will be the container inventory on the right-hand side.
+	1. Multiple inventories on one screen (transferring items)
 	2. Add equip slots. Mini inventory?
 	3. Clean-up prototype code.
 	4. OnReceive and OnRemove calls
 	5. OnDrop calls when item is dragged out of its inventory
-	6. Version control
+		6. Version control [done]
 */
 public class InventoryManager : MonoBehaviour{
 	public GameObject player;
 	public GameObject transfer;
+
 	public GameObject slotPre;
 	public GameObject bSlotPre;
 	public GameObject iSlotPre;
 	public Text textTitlePre;
-	public Sprite test;
 
-	private GameObject[,] bSlotGrid;
 	private Inventory playerInv;
 	private Inventory transferInv;
+
 	private  Vector2 _slotSize;
 	private GameObject _dragIcon;
 	private RectTransform _dragPlane;
@@ -40,7 +39,6 @@ public class InventoryManager : MonoBehaviour{
 	void Start () {
 		startPos = new Vector2(-75f, 99f);
 		playerInv = player.GetComponent<Inventory>();
-		bSlotGrid = new GameObject[playerInv.inventory.GetLength(0),playerInv.inventory.GetLength(1)];
 		_slotSize = new Vector2(0.3f, 0.3f);
 		CallInventory();
 	}
@@ -54,7 +52,7 @@ public class InventoryManager : MonoBehaviour{
 
 	void OnGUI(){
 		//This is in the "OnGUI" method so that dragging or other functions do not "lag" behind the actual position of the mouse cursor.
-		//This is similar to FixedUpdate, but for usage in GUI methods.
+		//This is similar to FixedUpdate, but for usage in GUI methods. I think.
 		Drag();
 	}
 	/// <summary>
@@ -82,7 +80,6 @@ public class InventoryManager : MonoBehaviour{
 				for(int row = 0; row < playerInv.inventory.GetLength(1); row++){
 					//Back slot and item slot instantiating...
 					GameObject bSlot = Instantiate(bSlotPre, this.transform) as GameObject;
-					bSlotGrid[col, row] = bSlot;
 					GameObject iSlot = Instantiate(iSlotPre, this.transform) as GameObject;
 					//Sets the scale of the back slot.
 					bSlot.GetComponent<RectTransform>().localScale = _slotSize;
@@ -97,7 +94,6 @@ public class InventoryManager : MonoBehaviour{
 					iSlot.name = row + "," + col;
 					//Sets the position of the item slot
 					iSlot.GetComponent<RectTransform>().anchoredPosition = Vector2.Scale(new Vector2(row, -col), new Vector2(SCALE, SCALE)) + startPos;
-					//Debug.Log(GetIndexAtPosition(iSlot.GetComponent<RectTransform>().anchoredPosition, SCALE, startPos));
 					//Parents this item slot instance to the itemslots empty gameobject in "slot".
 					iSlot.transform.SetParent(slot.transform.GetChild(1).transform, true);
 					//This block stretches the itemslot to accomodate the size of the actual item in the gridspace.
@@ -228,9 +224,8 @@ public class InventoryManager : MonoBehaviour{
 	/// <summary>
 	/// Helper method to add the item in the GUI at the mouse.
 	/// </summary>
-	//FIXME: Offset position to be at the center of its starting slot.
 	private bool AddGUIItem(PointerEventData eD){
-		if(_dragIcon.GetComponent<RectTransform>() != null){
+		//if(_dragIcon.GetComponent<RectTransform>() != null){
 			Vector2 finalPos = _dragIcon.GetComponent<RectTransform>().position + new Vector3(SCALE / 2, SCALE / -2);
 			eD.position = finalPos;
 			GraphicRaycaster gCast;
@@ -249,7 +244,7 @@ public class InventoryManager : MonoBehaviour{
 					return playerInv.AddItemAtPosition(Hack(_resIter.gameObject.name), _selected);
 				}
 			}
-		}
+		//}
 		return false;
 	}
 	//this actually somehow works
@@ -267,8 +262,8 @@ public class InventoryManager : MonoBehaviour{
 	/// <param name="guiPos">Rect position of the item slot.</param>
 	/// <param name="scalar">Scalar by which the position was scaled by.</param>.</param>
 	/// <param name="offset">Offset by which the position was added by.</param>
-	//this is the holy grail
 	//FIXME: Broken. Vector components are truncating
+	//The hack works for nows
 	private Vector2Int GetIndexAtPosition(Vector2 guiPos, int scalar, Vector2 offset){
 		float _deltaX = scalar / -2;
 		float _deltaY = scalar / 2;
@@ -278,34 +273,4 @@ public class InventoryManager : MonoBehaviour{
 
 		return res;
 	}
-
-
-	/// <summary>
-	/// Marks a dragged item to the actual inventory logic after the mouse is released.
-	/// </summary>
-	//bad solution
-	/*
-	private void MarkToUI(){
-		Debug.Log("Called method...");
-		PointerEventData eD = new PointerEventData(null);
-		GraphicRaycaster rCas = transform.parent.GetComponent<GraphicRaycaster>();
-		List<RaycastResult> res = new List<RaycastResult>();
-		eD.position = Input.mousePosition;
-		rCas.Raycast(eD, res);
-		foreach(RaycastResult _resIter in res){
-			if(_resIter.gameObject.transform.parent.name.Equals("Backslots")){
-				Debug.Log("check passed");
-				for(int row = 0; row < bSlotGrid.GetLength(1); row++){
-					for(int col = 0; col < bSlotGrid.GetLength(0); col++){
-						if(_resIter.gameObject.Equals(bSlotGrid[col, row])){
-							Debug.Log(new Vector2Int(col, row).ToString());
-							playerInv.AddItemAtPosition(new Vector2Int(col, row), _selected);
-							//playerInv.RemoveItemAtPosition(new Vector2Int(col, row));
-							return;
-						}
-					}
-				}
-			}
-		}
-	}*/
 }

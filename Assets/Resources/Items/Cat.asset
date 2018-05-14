@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23bec05e95b288940b6dbe8c70e94a12, type: 3}
+  m_Name: Cat
+  m_EditorClassIdentifier: 
+  size: {x: 3, y: 4}
+  itemName: Cat
+  description: Test item, put whatever dimensions you want.
+  image: {fileID: 21300000, guid: 6f46ed4cd8f6fcd4dba5791fae436d86, type: 3}
+  obj: {fileID: 0}
+  isStackable: 0
+  maxStack: 0
+  START_POS: {x: 0, y: 0}

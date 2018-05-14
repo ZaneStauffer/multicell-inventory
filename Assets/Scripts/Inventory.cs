@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour {
 	public Item test2;
 	public Item test3;
 	public Item test4;
+	public Item test5;
 	public Vector2Int size;
 	public Slot[,] inventory;
 	public bool hasInitialized = false;
@@ -49,7 +50,9 @@ public class Inventory : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.R)){
 			Debug.Log(AddItemAtPosition(new Vector2Int(col, row), test4));
 		}
-
+		if(Input.GetKeyDown(KeyCode.T)){
+			Debug.Log(AddItemAtPosition(new Vector2Int(col, row), test5));
+		}
 		if(Input.GetKeyDown(KeyCode.Z)){
 			Debug.Log(RemoveItemAtPosition(new Vector2Int(col, row)));
 		}
